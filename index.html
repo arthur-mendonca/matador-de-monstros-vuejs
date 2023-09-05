@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<section id="app">
+
+    <header class="upper_part">
+        <div>
+            <h4>Herói</h4>
+            <progress class="progress_bar" max="100" :value=" hero_hp" :class="getProgressBarClass(hero_hp)"></progress>
+            <span>{{hero_hp}}/100</span>
+        </div>
+        <div>
+            <h4>Monstro</h4>
+            <progress class="progress_bar" max="100" :value="monster_hp" :class="getProgressBarClass(monster_hp)"></progress>
+            <span>{{monster_hp}}/100</span>
+        </div>
+    </header>
+    <main>
+        <div class="button_menu" v-if="!start">
+            <button id="iniciar" @click="start = !start">Iniciar novo jogo</button>
+        </div>
+        <div v-if="win" style="color: green;" class="win_lose_menu">
+            <p>Você ganhou!</p>
+            <button id="iniciar" @click="startNewGame">Iniciar novo jogo</button>
+        </div>
+        <div v-if="lose" style="color: red;" class="win_lose_menu">
+            <p>Você perdeu!</p>
+            <button id="iniciar" @click="startNewGame">Iniciar novo jogo</button>
+        </div>
+        <div v-if="lose && win">
+            <p>Empate!</p>
+            <button id="iniciar" @click="startNewGame">Iniciar novo jogo</button>
+        </div>
+        <div v-if="start && !win && !lose" class="button_menu">
+            <button id="atacar" @click="normalAttack">Atacar</button>
+            <button id="super_ataque" @click="superAttack">Super Ataque</button>
+            <button id="curar" @click="heal">Curar</button>
+            <button @click="giveUp" id="desistir">Desistir</button>
+        </div>
+        <div class="log_section">
+            <ul class="log_ul">
+                <li style="list-style: none;" v-for="(log, index) in hero_log" :class="index%2 === 0 ? 'bg-hero-color1' : 'bg-hero-color2'">{{log}}</li>
+            </ul>
+            <ul class="log_ul">
+                <li style="list-style: none;" v-for="(log, index) in monster_log" :class="index%2 === 0 ? 'bg-monster-color1' : 'bg-monster-color2'" >{{log}}</li>
+            </ul>
+        </div>
+    </main>
+</section>
+</html>
+
+</div> 
+<script src="app.js"></script>
+</div>
